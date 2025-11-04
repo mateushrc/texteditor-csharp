@@ -12,11 +12,11 @@ namespace TextEditor
         static void Menu()
         {
             Console.Clear();
-            Console.WriteLine("What do you want to do?");
+            Console.WriteLine("What do you want to do?\n");
             Console.WriteLine("1 - Open file");
             Console.WriteLine("2 - Create new file");
             Console.WriteLine("0 - Exit");
-            Console.Write("Choose: ");
+            Console.Write("\nChoose: ");
             short option = short.Parse(Console.ReadLine());
 
             switch (option)
@@ -31,30 +31,30 @@ namespace TextEditor
         static void Open()
         {
             Console.Clear();
-            Console.WriteLine("What is the file path?");
+            Console.WriteLine("What is the file path? (Ex: C:/dev/text.txt)");
             string path = Console.ReadLine();
+            Console.WriteLine("\n");
 
             using (var file = new StreamReader(path))
             {
                 string text = file.ReadToEnd();
-                Console.WriteLine(text);
+                Console.WriteLine(text + "\n");
             }
 
-            Console.WriteLine("");
-            Console.ReadLine();
+            Console.ReadKey();
             Menu();
         }
         static void Edit()
         {
             Console.Clear();
-            Console.WriteLine("Type your text below (ESC to exit)");
+            Console.WriteLine("Type your text below (ESC to finish)");
             Console.WriteLine("=======================");
             string text = "";
 
             do
             {
                 text += Console.ReadLine();
-                text += Environment.NewLine;
+                text += "\n";
             }
             while (Console.ReadKey().Key != ConsoleKey.Escape);
 
@@ -63,7 +63,7 @@ namespace TextEditor
         static void Save(string text)
         {
             Console.Clear();
-            Console.WriteLine("What path to save the file?");
+            Console.WriteLine("WWhat path to save the file? (Ex: C:/dev/text.txt)");
             var path = Console.ReadLine();
 
             using (var file = new StreamWriter(path))
@@ -71,8 +71,8 @@ namespace TextEditor
                 file.Write(text);
             }
 
-            Console.WriteLine($"File {path} saved successfully.");
-            Console.ReadLine();
+            Console.WriteLine($"\nFile {path} saved successfully.");
+            Console.ReadKey();
             Menu();
         }
     }
